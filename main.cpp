@@ -31,7 +31,7 @@ struct Individual{
 
     Individual(int32_t loci,double mr){
         mutation_rate = mr;
-        for(int32_t i=0;i<loci;i++)
+        for(int32_t i=0;i<loci*2;i++)
             genome[i]='A';
     }
 
@@ -65,10 +65,24 @@ struct Individual{
         return pow(1-delta,bad);
     }
 };
+namespace Matingstrat{
+  enum Type{OUTBRED,INBRED,MIXBRED};
+}
 struct Population{
-  void initpopu(double mr);
+  //vars
+  Individual members[simconfig::POP_SIZE];
+  int32_t gen;
+  Matingstrat::Type strat;
+  //func
+  void initpopu(double mr){
+    gen=0;
+    for(int32_t i=0;i<(int32_t)simconfig::POP_SIZE;i++){
+      members[i]=Individual(simconfig::LOCI_COUNT,mr);
+    }
+  };
   void mutate();
-
+  void nextgen();
+  double avgfitness(double delta) const;
 
 
 };
