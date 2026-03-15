@@ -1,6 +1,7 @@
 CXX = g++
-CXXFLAGS = -O3
-LIBS = -lGL -lm -lpthread -ldl -lrt -lX11
+CXXFLAGS = -O3 -march=native -flto -Wall -Wextra -std=c++11
+LDFLAGS = -flto
+LIBS = -lm
 
 TARGET = main
 SRC = main.cpp
@@ -8,7 +9,7 @@ SRC = main.cpp
 all: run
 
 $(TARGET): $(SRC)
-	$(CXX) $(SRC) -o $(TARGET) $(CXXFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
 run: $(TARGET)
 	./$(TARGET)
