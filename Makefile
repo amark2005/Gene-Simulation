@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -O3 -march=native -flto -Wall -Wextra -std=c++11
-LDFLAGS = -flto
+CXXFLAGS = -O3 -march=native -flto -Wall -Wextra -std=c++20
+LDFLAGS = -flto -pthread
 LIBS = -lm
 
 TARGET = main
